@@ -6,7 +6,7 @@
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 ## Description
-Nodejs Redis Caching, Request Cache in Redis and Nodejs
+Nodejs Redis Caching, Request Cache in Redis and Node.js
 
 ---
 ⌨️with ❤️by [gcristia](https://github.com/gcristia) 😊 
