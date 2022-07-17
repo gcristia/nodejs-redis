@@ -40,5 +40,23 @@ app.get('/character', async (req, res) => {
 
 })
 
+app.get('/character/:id', async (req, res) => {
+
+    try {
+        const reply = await clientRedis.get(req.originalUrl)
+
+        if (reply) return res.json(JSON.parse(reply))
+
+        const response = await axios.get('https://rickandmortyapi.com/api/character/'+req.params.id)
+
+        await clientRedis.set(req.originalUrl, JSON.stringify(response.data))
+
+        res.json(response.data)
+    } catch (err) {
+        console.log(err)
+    }
+
+})
+
 app.listen(3000)
 console.log('Server on port 3000')
