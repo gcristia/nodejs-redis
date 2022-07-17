@@ -22,17 +22,22 @@ connectRedis()
 
 app.get('/character', async (req, res) => {
 
-    const reply = await clientRedis.get('characters')
+    try {
+        const reply = await clientRedis.get('characters')
 
-    if (reply) {
-        res.json(JSON.parse(reply))
-    } else {
+        if (reply) {
+            return res.json(JSON.parse(reply))
+        }
+
         const response = await axios.get('https://rickandmortyapi.com/api/character')
 
         await clientRedis.set("characters", JSON.stringify(response.data))
 
         res.json(response.data)
+    } catch (err) {
+        console.log(err)
     }
+
 })
 
 app.listen(3000)
